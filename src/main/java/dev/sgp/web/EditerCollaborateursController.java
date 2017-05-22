@@ -1,85 +1,58 @@
 package dev.sgp.web;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import static java.util.stream.Collectors.*;
+import java.util.stream.Stream;
+
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
 public class EditerCollaborateursController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public EditerCollaborateursController() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String matriculeParam = request.getParameter("matricule");
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		String matricule = request.getParameter("matricule");
-
-		
-//		response.getWriter().write("<h1>Edite des collaborateurs</h1>"
-//
-//				+ "<h2> Créer la liste des collaborateurs avec les infos suivantes</h2>"
-//				);
-		if (matricule == null){
+		if (matriculeParam == null || "".equals(matriculeParam.trim())) {
 			response.setStatus(400);
-			response.getWriter().write("ERROR : un matricule est attendu");
-		}else{
-			response.getWriter().write("<h1> Edition de collaborateurs </h1>"
-             
-
-				+ "<ul>"
-
-				+ "<li>matricule = " + matricule + "</li>");
+			response.getWriter().write("Un matricule est attendu");
+		} else {
+			response.setContentType("text/html");
+			response.getWriter().write("<h1>Edition de collaborateur</h1> Matricule : " + matriculeParam);
 		}
+
+		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		String matricule = request.getParameter("matricule");
-		String titre = request.getParameter("titre");
-		String nom = request.getParameter("nom");
-		String prenom = request.getParameter("prenom");
-
-		response.setContentType("text/html");
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if (matricule == null || titre == null || nom == null ||prenom == null){
+		Map<Boolean, List<String>> validationParams = validerParametres(request, "matricule","titre", "nom", "prenom");
+		
+		response.setCharacterEncoding("utf-8");
+		
+		if (validationParams.get(false) != null) {
 			response.setStatus(400);
-		}else{
+			
+			response.getWriter().write("Les paramètres suivants sont incorrects : " + validationParams.get(false).stream().collect(joining(",")));
+		} else {
 			response.setStatus(201);
+			
+			response.getWriter().write("Création d'un collaborateur avec les informations suivantes : " 
+				+ validationParams.get(true).stream().map(p -> p + "=" + request.getParameter(p)).collect(joining(",")));
 		}
-
-		response.getWriter().write("<h1>Edite des collaborateurs</h1>"
-
-				+ "<h2> Créer la liste des collaborateurs avec les infos suivantes</h2>"              
-
-				+ "<ul>"
-
-				+ "<li>matricule = " + matricule + "</li>"
-
-				+ "<li>titre = " + titre + "</li>"
-
-				+ "<li>nom = " + nom + "</li>"
-
-				+ "<li>prenom = " + prenom + "</li>"
-
-				+ "</ul>");
-
+		
 	}
-
+	
+	private Map<Boolean, List<String>> validerParametres(HttpServletRequest request, String... params) {
+		return Stream.of(params).collect(
+				groupingBy(
+						param -> request.getParameter(param) != null && !"".equals(request.getParameter(param)
+				)));
+	}
 }
