@@ -9,7 +9,26 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/bootstrap-3.3.7-dist/css/bootstrap.css">
 </head>
-<body>
+<body class="container">
+
+
+<%-- 	<p class="alert alert-danger">${ !empty status ? "Erreur !" : '' }</p> --%>
+
+	<%
+		int erreur = (int) request.getAttribute("erreur");
+		if (erreur == 1) {
+			String errorMessage = (String) request.getAttribute("errorMessage");
+	%>
+
+	<p class="alert alert-danger">
+		<%=errorMessage%></p>
+
+	<%
+		}
+	%>
+
+
+
 
 	<br>
 	<!-- le liens se trouve dans le .xml au niveau servlet mapping -->

@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dev.sgp.entite.Collaborateur;
+import dev.sgp.entite.Departement;
 import dev.sgp.service.CollaborateurService;
+import dev.sgp.service.DepartementService;
 import dev.sgp.util.Constantes;
 
 /**
@@ -24,6 +26,7 @@ public class ListerCollaborateursController extends HttpServlet {
 	public static final String listerJs = "/WEB-INF/views/collab/listerCollaborateurs.jsp";
 	private static final long serialVersionUID = 1L;
 	private CollaborateurService collabService = Constantes.COLLAB_SERVICE;
+	private DepartementService dptService = Constantes.DEPT_SERVICE;
 
 	public ListerCollaborateursController() {
 		super();
@@ -34,10 +37,13 @@ public class ListerCollaborateursController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	
-
-				// je sauvegarde mon nouveau collaborateur qu'on a créer
+		List<Collaborateur> collaborateurs = collabService.listerCollaborateurs();
+		List<Departement> departements = dptService.listerDepartements();
 			
-		request.setAttribute("collaborateur", collabService.listerCollaborateurs());
+		request.setAttribute("collaborateurs", collabService.listerCollaborateurs());
+		
+		request.setAttribute("departements", departements);
+		
 
 		request.getRequestDispatcher(listerJs).forward(request, response);
 	}

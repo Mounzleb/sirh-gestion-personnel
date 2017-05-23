@@ -26,11 +26,11 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>NouveauCollaborateur</servlet-name>
-		<servlet-class>dev.sgp.web.NouveauCollaborateur</servlet-class>
+		<servlet-name>NouveauCollaborateurController</servlet-name>
+		<servlet-class>dev.sgp.web.NouveauCollaborateurController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>NouveauCollaborateur</servlet-name>
+		<servlet-name>NouveauCollaborateurController</servlet-name>
 		<url-pattern>/collaborateurs/nouveau</url-pattern>
 	</servlet-mapping>
 </web-app>
