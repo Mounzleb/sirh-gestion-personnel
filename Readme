@@ -1,0 +1,35 @@
+/////////////////////////site expliquant bien la Servlet "Filter" 
+https://blog.netapsys.fr/les-web-servlet-filters-et-le-cryptage-1ere-partie/
+
+
+***********************resumé des filter****************************
+La «servlet Filter» doit implémenter l'interface javax.servlet.Filter qui déclare trois méthodes permettant de greffer les transformations. Ces méthodes (toutes void) sont :
+
+doFilter(HttpServletRequest rq,HttpServletResponse rp,FilterChain ch)
+throws ServletException,IOException;
+
+init(FilterConfig fConfig) throws ServletException;
+
+
+
+
+La méthode principale est «doFilter». 
+Elle centralise le code des transformations voulues, et c'est ici que le chaînage 
+doit être réalisé avec l'appel suivant ch.doFilter(req,rep) ce qui permet de passer 
+la main aux autres Filtres jusqu'à la servlet ou la jsp finale.
+destroy();
+**********************fin résumé filter*****************************
+
+///////////////////////site presentant les methode du java.lang
+https://www.tutorialspoint.com/java/lang/system_currenttimemillis.htm
+
+/////////////////////site tutoriel java
+http://www.java2s.com/Tutorial/Java/0400__Servlet/Catalog0400__Servlet.htm
+
+
+
+
+REMARQUE: 
+On recupére avec setAttribute() dans la servlet les données nécessaire. Par exemple les données d'un formulaire.
+ET aprés pour les afficher, utilisé etc... dans notre page web, on les récupére avec le getAttribute() dans le .jsp
+Et si on utilise JSTL on utilise ${}
