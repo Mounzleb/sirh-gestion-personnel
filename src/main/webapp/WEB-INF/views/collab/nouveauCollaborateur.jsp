@@ -80,7 +80,7 @@
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="adresse">Adresse</label>
 				<div class="col-md-4">
-					<textarea class="form-control" id="adresse" name="textarea"></textarea>
+					<textarea class="form-control" id="adresse" name="adresse"></textarea>
 				</div>
 			</div>
 
@@ -89,7 +89,7 @@
 				<label class="col-md-4 control-label" for="numSecu">Numéro
 					de sécurité sociale</label>
 				<div class="col-md-4">
-					<input id="numSecu" name="textinput" type="text"
+					<input id="numSecu" name="numSecu" type="text"
 						placeholder="Saisir Votre numero de securite social"
 						class="form-control input-md" required="15">
 

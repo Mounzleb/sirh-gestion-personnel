@@ -2,6 +2,7 @@ package dev.sgp.web;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -49,31 +50,32 @@ public class NouveauCollaborateurController extends HttpServlet {
 		// fonctionde name de leur id
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
-		LocalDate dateDeNaissance = LocalDate.parse("date");
+		LocalDate dateDeNaissance = LocalDate.parse(request.getParameter("date"));
 		String adresse = request.getParameter("adresse");
-		String numsecu = request.getParameter("numsecu");
+		String numSecu = request.getParameter("numSecu");
 
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String suffixe = bundle.getString("suffixe.email");
 
 		// gérer un matricule
 		String matricule = UUID.randomUUID().toString();
-
 		String emailPro = prenom + "." + nom + suffixe;
+		ZonedDateTime dateHeureCreation = ZonedDateTime.now();
 
 		newCollab.setMatricule(matricule);
 		newCollab.setNom(nom);
 		newCollab.setPrenom(prenom);
 		newCollab.setDateDeNaissance(dateDeNaissance);
 		newCollab.setAdresse(adresse);
-		newCollab.setNumeroDeSecuSociale(numsecu);
+		newCollab.setNumeroDeSecuSociale(numSecu);
 		newCollab.setEmailPro(emailPro);
 		newCollab.setActif(true);
+		newCollab.setDateHeureCreation(dateHeureCreation);
 		// newCollab.setDateHeureCreation(dateHeureCreation);
 
-		Map<Boolean, List<String>> validationParams = validerParametres(request, "nom", "prenom", "adresse", "numsecu");
+		Map<Boolean, List<String>> validationParams = validerParametres(request, "nom", "prenom", "adresse", "numSecu");
 
-		if (validationParams.get(false) != null || numsecu.length() < 15) {
+		if (validationParams.get(false) != null || numSecu.length() < 15) {
 			response.setStatus(400);
 
 			request.setAttribute("erreur", 1);
@@ -90,13 +92,13 @@ public class NouveauCollaborateurController extends HttpServlet {
 						+ validationParams.get(false).stream().collect(Collectors.joining(","));
 			}
 
-			if (numsecu.length() < 15) {
+			if (numSecu == null || numSecu.length() < 15) {
 				errorMessage += " Et numero de sécu incorrect (15 charac) !";
 			}
 
 			request.setAttribute("errorMessage", errorMessage);
 
-			request.getRequestDispatcher("/WEB-INF/views/collab/nouveau.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/collab/nouveauCollaborateur.jsp").forward(request, response);
 		} else {
 			response.setStatus(201);
 
@@ -110,7 +112,7 @@ public class NouveauCollaborateurController extends HttpServlet {
 		}
 
 		// je sauvegarde mon nouveau collaborateur qu'on a créer
-		collabService.sauvegarderCollaborateur(newCollab);
+		//collabService.sauvegarderCollaborateur(newCollab);
 
 		request.setAttribute("collaborateurs", collabService.listerCollaborateurs());
 

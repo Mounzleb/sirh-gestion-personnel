@@ -2,6 +2,7 @@
 <%@page import="dev.sgp.entite.Collaborateur"%>
 <%@page import="dev.sgp.entite.Departement"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 
@@ -10,9 +11,9 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/bootstrap-3.3.7-dist/css/bootstrap.css">
+	href="<c:url value='/bootstrap-3.3.7-dist/css/bootstrap.css'></c:url>">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/bootstrap-3.3.7-dist/js/bootstrap.js">
+	href="<c:url value='/bootstrap-3.3.7-dist/js/bootstrap.js'></c:url>">
 <title>SGP - liste collaborateur</title>
 </head>
 
@@ -47,24 +48,16 @@
 					par département :</label>
 				<div class="col-md-2">
 					<select id="depSearch" name="depSearch" class="form-control">
-					
-					<option value="0">Tous</option>
-					
-					
-						<%						
-						List<Departement> departements = (List<Departement>) request.getAttribute("departements");
-						
-						for (Departement dept : departements) {
-						
-						%>
-			
-						<option value="2"><%=dept.getNom()%></option>
-						
-						
-						<%
-							}
-						%>
-						
+
+						<option value="0">Tous</option>
+
+						<!-- boucle forEach faite grace a JSTL au lieu de l'ecriture jst qu'on avait -->
+						<c:forEach var="dept" items="${ departements }">
+ +						<option value="${ dept.id }">${ dept.nom }</option>
+						</c:forEach>
+
+
+
 					</select>
 				</div>
 			</div>
@@ -96,8 +89,9 @@
 	<br>
 	<br>
 
-<!-- Buttons Pour aller sur la pager nouveau collaborateur -->
-	<a href="<%=request.getContextPath()%>/collaborateurs/nouveau" class="btn btn-lg btn-primary"><span
+	<!-- Buttons Pour aller sur la pager nouveau collaborateur -->
+	<a href="<%=request.getContextPath()%>/collaborateurs/nouveau"
+		class="btn btn-lg btn-primary"><span
 		class="glyphicon glyphicon-user"></span>nouveau</a>
 	<br>
 	<br>
@@ -105,29 +99,24 @@
 	<br>
 	<div class="jumbotron row ">
 
-		<%
-			
-		List<Collaborateur> collaborateurs = (List<Collaborateur>) request.getAttribute("collaborateurs");
-			for (Collaborateur collab : collaborateurs) {
-		%>
 
-		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+		<c:forEach var="collab" items="${collaborateurs}">
 
-			<ul>
-				<li>Matricule : <%=collab.getMatricule()%> <br> Nom : <%=collab.getNom()%><br>
-					Prenom : <%=collab.getPrenom()%><br> Date de Naissance : <%=collab.getDateDeNaissance()%><br>
-					Adresse : <%=collab.getAdresse()%><br>Email professionel : <%=collab.getEmailPro()%><br> actif ? : <%=collab.isActif()%><br>
-					<br> <br>
-				</li>
-				<a href="" class="btn btn-xs btn-warning pull-right"><span
-					class="glyphicon glyphicon-pencil"></span> Modifier</a>
-			</ul>
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
 
-		</div>
+				<ul>
+					<li> ${collab.matricule} - ${collab.nom}- ${collab.prenom}- ${collab.emailPro} ${collab.adresse}
+					- ${collab.numeroDeSecuSociale}- ${collab.dateDeNaissance}- ${collab.dateHeureCreation}
+					</li>
 
-		<%
-			}
-		%>
+					<a href="" class="btn btn-xs btn-warning pull-right"><span
+						class="glyphicon glyphicon-pencil"></span> Modifier</a>
+				</ul>
+
+			</div>
+
+		</c:forEach>
+
 
 	</div>
 

@@ -40,7 +40,7 @@ public class ListerCollaborateursController extends HttpServlet {
 		List<Collaborateur> collaborateurs = collabService.listerCollaborateurs();
 		List<Departement> departements = dptService.listerDepartements();
 			
-		request.setAttribute("collaborateurs", collabService.listerCollaborateurs());
+		request.setAttribute("collaborateurs", collaborateurs);
 		
 		request.setAttribute("departements", departements);
 		
