@@ -29,6 +29,18 @@
     <filter-name>FrequentationFilter</filter-name>
     <filter-class>dev.sgp.filter.FrequentationFilter</filter-class>
   </filter>
+  
+  <servlet>
+    <servlet-name>VisiteWebController</servlet-name>
+    <servlet-class>dev.sgp.web.VisiteWebController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VisiteWebController</servlet-name>
+    <url-pattern>/collaborateurs/statistique</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Ici on dspecifie le chemin des fichier sur lequelle notre filtre va s'appliquer
+  Vue qu'on a mis /* donc le filtre va s'appliqué sur tout les fichiers (classe) de notre application -->
   <filter-mapping>
     <filter-name>FrequentationFilter</filter-name>
     <url-pattern>/*</url-pattern>

@@ -56,10 +56,13 @@ public class FrequentationFilter implements Filter {
 		// On fait un cast pour faire passer le after - before d'un long à un
 		// int car le set du temps d'execution est un int
 		int tempsExecution = (int) (after - before);
-		VisiteWeb visite = new VisiteWeb();
+		VisiteWeb visite = new VisiteWeb(path,tempsExecution);
 
+		//à voir si on garde malgré le constructor ou pas
 		visite.setChemin(path);
 		visite.setTempsExecution(tempsExecution);
+		
+		visiteWebService.sauvegarderVisiteurWeb(visite);
 
 		// la ligne suivante est pour afficher le temps d'execution dans la
 		// console

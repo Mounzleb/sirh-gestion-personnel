@@ -4,6 +4,11 @@ public class VisiteWeb {
 	
 	int id;
 	String chemin;
+	public VisiteWeb(String chemin, int tempsExecution) {
+		super();
+		this.chemin = chemin;
+		this.tempsExecution = tempsExecution;
+	}
 	int tempsExecution;
 	
 	

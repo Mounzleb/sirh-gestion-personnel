@@ -93,6 +93,10 @@
 	<a href="<%=request.getContextPath()%>/collaborateurs/nouveau"
 		class="btn btn-lg btn-primary"><span
 		class="glyphicon glyphicon-user"></span>nouveau</a>
+		
+		<a href="<c:url value='/collaborateurs/statistique'></c:url>" class="btn btn-lg btn-primary">
+		<span
+		class="glyphicon glyphicon-user"></span>statistiques</a>
 	<br>
 	<br>
 	<h3>Liste des collaborateur :</h3>
