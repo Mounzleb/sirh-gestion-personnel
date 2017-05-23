@@ -21,7 +21,7 @@ import dev.sgp.util.Constantes;
  */
 
 public class ListerCollaborateursController extends HttpServlet {
-	public static final String fichierJs = "/WEB-INF/views/collab/listerCollaborateurs.jsp";
+	public static final String listerJs = "/WEB-INF/views/collab/listerCollaborateurs.jsp";
 	private static final long serialVersionUID = 1L;
 	private CollaborateurService collabService = Constantes.COLLAB_SERVICE;
 
@@ -33,17 +33,13 @@ public class ListerCollaborateursController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// ici je crée un objet collaborateur
-
-				// ici opn Recupére les saisie des input dans le fichier.js en
-				// fonctionde name de leur id
-
+	
 
 				// je sauvegarde mon nouveau collaborateur qu'on a créer
 			
 		request.setAttribute("collaborateur", collabService.listerCollaborateurs());
 
-		request.getRequestDispatcher(fichierJs).forward(request, response);
+		request.getRequestDispatcher(listerJs).forward(request, response);
 	}
 
 	/**
@@ -53,32 +49,7 @@ public class ListerCollaborateursController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// ici je crée un objet collaborateur
-		Collaborateur newCollab = new Collaborateur();
 
-		// ici opn Recupére les saisie des input dans le fichier.js en
-		// fonctionde name de leur id
-		String nom = request.getParameter("nom");
-		String prenom = request.getParameter("prenom");
-		LocalDate dateDeNaissance = LocalDate.parse("dateDeNaissance");
-		String adresse = request.getParameter("adresse");
-		
-//		String emailPro =prenom + nom + "@societe.com";
-		
-		
-		newCollab.setNom(nom);
-		newCollab.setPrenom(prenom);
-		newCollab.setAdresse(adresse);
-		newCollab.setDateDeNaissance(dateDeNaissance);
-	
-
-		// je sauvegarde mon nouveau collaborateur qu'on a créer
-		collabService.sauvegarderCollaborateur(newCollab);
-
-		// j'envoi ma lise de collaborateurs à la jsp
-		request.setAttribute("collaborateur", collabService.listerCollaborateurs());
-
-		doGet(request, response);
 	}
 
 }
