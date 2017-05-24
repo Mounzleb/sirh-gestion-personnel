@@ -20,7 +20,7 @@ import dev.sgp.util.Constantes;
 /**
  * Servlet implementation class VisiteWebController
  */
-@WebServlet("/VisiteWebController")
+@WebServlet("/collaborateurs/statistique")
 public class VisiteWebController extends HttpServlet {
 	public static final String visiteurJs = "/WEB-INF/views/collab/statististiqueVisiteWeb.jsp";
 	private static final long serialVersionUID = 1L;

@@ -23,7 +23,7 @@ import dev.sgp.util.Constantes;
 /**
  * Servlet implementation class NouveauCollaborateur
  */
-
+@WebServlet("/collaborateurs/nouveau")
 public class NouveauCollaborateurController extends HttpServlet {
 	public static final String nouveauJs = "/WEB-INF/views/collab/nouveauCollaborateur.jsp";
 	private static final long serialVersionUID = 1L;

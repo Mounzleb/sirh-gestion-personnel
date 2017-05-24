@@ -14,9 +14,8 @@ import dev.sgp.entite.VisiteWeb;
 import dev.sgp.service.VisiteWebService;
 import dev.sgp.util.Constantes;
 
-/**
- * Servlet Filter implementation class FrequentationFilter
- */
+
+@WebFilter(urlPatterns = { "/*" }, description = "statistic filter")
 public class FrequentationFilter implements Filter {
 	private VisiteWebService visiteWebService = Constantes.VISITE_WEB_SERVICE;
 	private FilterConfig config = null;

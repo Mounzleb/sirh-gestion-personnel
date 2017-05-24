@@ -21,7 +21,7 @@ import dev.sgp.util.Constantes;
 /**
  * Servlet implementation class ListerCollaborateursController
  */
-
+@WebServlet("/collaborateurs/lister")
 public class ListerCollaborateursController extends HttpServlet {
 	public static final String listerJs = "/WEB-INF/views/collab/listerCollaborateurs.jsp";
 	private static final long serialVersionUID = 1L;
