@@ -1,34 +1,49 @@
 
 package dev.sgp.service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Stateless;
+
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import dev.sgp.entite.CollabEvt;
 import dev.sgp.entite.Collaborateur;
 import dev.sgp.entite.TypeCollabEvt;
 
-@ApplicationScoped
+@Stateless
 public class CollaborateurService {
+
+	
 
 	@Inject
 	Event<CollabEvt> emetteurEvenementCollab;
 
-	// création de la liste de collaborateurs
-	List<Collaborateur> listeCollaborateurs = new ArrayList<>();
+	// le unit name est le nom de la <persistence-unit name="sgp-pu"> dans le
+	// persistance.xml
+	@PersistenceContext(unitName = "sgp-pu") private EntityManager em;
 
-	// lister la liste de collaborateur
 	public List<Collaborateur> listerCollaborateurs() {
-		return listeCollaborateurs;
+		
+	
+
+		TypedQuery<Collaborateur> query = em.createQuery("Select collabo from Collaborateur collabo",
+				Collaborateur.class);
+		
+		// ici le query.getResultList() recupére nos collaborateur créer et les met dans une liste
+		// on remplace ainsi l'utilisation des listes avec List<> (Voir version précédente)
+		return query.getResultList();
 	}
 
 	// sauvegarder la liste
 	public void sauvegarderCollaborateur(Collaborateur collab) {
-		listeCollaborateurs.add(collab);
+
+		em.persist(collab);
 
 		// ****************Création évenement*******************
 

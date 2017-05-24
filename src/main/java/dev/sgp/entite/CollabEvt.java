@@ -2,7 +2,7 @@ package dev.sgp.entite;
 
 import java.time.ZonedDateTime;
 
-import javax.inject.Inject;
+
 
 public class CollabEvt {
 

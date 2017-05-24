@@ -6,15 +6,13 @@ import java.util.Map;
 import static java.util.stream.Collectors.*;
 import java.util.stream.Stream;
 
-import javax.inject.Inject;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dev.sgp.service.CollaborateurService;
-import dev.sgp.service.DepartementService;
 
 @WebServlet("/collaborateurs/editer")
 public class EditerCollaborateursController extends HttpServlet {

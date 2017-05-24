@@ -3,8 +3,13 @@ package dev.sgp.entite;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Collaborateur {
 	
+	@Id
 	String matricule;
 	String nom;
 	String prenom;
@@ -15,6 +20,26 @@ public class Collaborateur {
 	String photo;
 	ZonedDateTime dateHeureCreation;
 	boolean actif;
+	
+	public Collaborateur(){
+		
+	}
+	
+
+	public Collaborateur(String matricule, String nom, String prenom, LocalDate dateDeNaissance, String adresse,
+			String numeroDeSecuSociale, String emailPro, String photo, ZonedDateTime dateHeureCreation, boolean actif) {
+		super();
+		this.matricule = matricule;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.dateDeNaissance = dateDeNaissance;
+		this.adresse = adresse;
+		this.numeroDeSecuSociale = numeroDeSecuSociale;
+		this.emailPro = emailPro;
+		this.photo = photo;
+		this.dateHeureCreation = dateHeureCreation;
+		this.actif = actif;
+	}
 	
 	
 	public String getMatricule() {

@@ -1,6 +1,6 @@
 Mon fichier Constante.jav adans dev.sgp.util me permet de faire des singleton "lowcost"
 
-/////////////////////////site expliquant bien la Servlet "Filter" 
+**********************site expliquant bien la Servlet "Filter" 
 https://blog.netapsys.fr/les-web-servlet-filters-et-le-cryptage-1ere-partie/
 
 
@@ -22,7 +22,7 @@ la main aux autres Filtres jusqu'à la servlet ou la jsp finale.
 destroy();
 **********************fin résumé filter*****************************
 
-///////////////////////site presentant les methode du java.lang
+*************************site presentant les methode du java.lang
 https://www.tutorialspoint.com/java/lang/system_currenttimemillis.htm
 
 /////////////////////site tutoriel java
@@ -31,7 +31,33 @@ http://www.java2s.com/Tutorial/Java/0400__Servlet/Catalog0400__Servlet.htm
 
 
 
-REMARQUE: 
+**********************REMARQUE: ******************
 On recupére avec setAttribute() dans la servlet les données nécessaire. Par exemple les données d'un formulaire.
 ET aprés pour les afficher, utilisé etc... dans notre page web, on les récupére avec le getAttribute() dans le .jsp
 Et si on utilise JSTL on utilise ${}
+
+
+************************************************
+*******************EJB*************************
+
+***************En plus du TP
+cliquer sur Help
+Install New Software: on tappe neon et on prend celui qui fini par eclipse.org/releases/neon
+endessous on tappe jpa et on coche les case JPA Diagramm Editor, -JPA Support, JPA configurator for WTP
+On lance et on installe.
+Apres le redemarage d'eclipse on :
+Clique droit projet -> configure -> convert to JPA project
+
+-convert to JPA -> disable library configuration
+
+cocher : discover annotated classes automatically
+
+
+
+
+
+
+
+
+
+
