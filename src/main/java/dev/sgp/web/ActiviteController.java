@@ -18,9 +18,10 @@ import dev.sgp.service.ActiveService;
  */
 @WebServlet("/ActiviteController/activite")
 public class ActiviteController extends HttpServlet {
+	public static final String activiteJs = "/WEB-INF/views/collab/activite.jsp";
 	private static final long serialVersionUID = 1L;
      @Inject private ActiveService activite;
-     @Inject private CollabEvt evt;
+    
 	
      
      
@@ -28,10 +29,10 @@ public class ActiviteController extends HttpServlet {
 
 		List<CollabEvt> evenementActivite =  activite.listerActiviterCollab();
 		
-		request.setAttribute("activites", evenementActivite);
+		request.setAttribute("evenementActivite", evenementActivite);
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+		// avec cette ligne on relie le controller au ficheir js 
+		request.getRequestDispatcher(activiteJs).forward(request, response);	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -20,7 +20,7 @@ public class ActiveService {
 		
 		
 		listeActiviterCollab.add(evt);
-		System.out.println("creation d'un nouveau collaborateur avec un nouveau matricule" + listeActiviterCollab);
+		System.out.println(evt.getDateHeure()+ " : " + "creation d'un nouveau collaborateur avec un nouveau matricule" + " : "+ evt.getMatricule());
 
 	}
 
