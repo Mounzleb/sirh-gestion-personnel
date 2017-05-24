@@ -92,11 +92,15 @@
 	<!-- Buttons Pour aller sur la pager nouveau collaborateur -->
 	<a href="<%=request.getContextPath()%>/collaborateurs/nouveau"
 		class="btn btn-lg btn-primary"><span
-		class="glyphicon glyphicon-user"></span>nouveau</a>
+		class="glyphicon glyphicon-user"></span>New Collaborator</a>
 		
 		<a href="<c:url value='/collaborateurs/statistique'></c:url>" class="btn btn-lg btn-primary">
 		<span
-		class="glyphicon glyphicon-user"></span>statistiques</a>
+		class="glyphicon glyphicon-user"></span>Statistiques</a>
+		
+		<a href="<c:url value='/collaborateurs/activite'></c:url>" class="btn btn-lg btn-primary">
+		<span
+		class="glyphicon glyphicon-user"></span>Activitées</a>
 	<br>
 	<br>
 	<h3>Liste des collaborateur :</h3>

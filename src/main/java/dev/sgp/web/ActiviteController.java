@@ -16,7 +16,7 @@ import dev.sgp.service.ActiveService;
 /**
  * Servlet implementation class ActiviteController
  */
-@WebServlet("/ActiviteController/activite")
+@WebServlet("/collaborateurs/activite")
 public class ActiviteController extends HttpServlet {
 	public static final String activiteJs = "/WEB-INF/views/collab/activite.jsp";
 	private static final long serialVersionUID = 1L;
