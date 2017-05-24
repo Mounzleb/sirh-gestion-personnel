@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +17,7 @@ import dev.sgp.entite.Collaborateur;
 import dev.sgp.entite.Departement;
 import dev.sgp.service.CollaborateurService;
 import dev.sgp.service.DepartementService;
-import dev.sgp.util.Constantes;
+
 
 /**
  * Servlet implementation class ListerCollaborateursController
@@ -25,8 +26,12 @@ import dev.sgp.util.Constantes;
 public class ListerCollaborateursController extends HttpServlet {
 	public static final String listerJs = "/WEB-INF/views/collab/listerCollaborateurs.jsp";
 	private static final long serialVersionUID = 1L;
-	private CollaborateurService collabService = Constantes.COLLAB_SERVICE;
-	private DepartementService dptService = Constantes.DEPT_SERVICE;
+	
+	// ici on instancié l'objet collabService et departementService grâce à CDI
+	// J'injecte une instance de ColaborateurService
+	@Inject private CollaborateurService collabService;
+	//J'injecte une instance de Departement Service
+	@Inject private DepartementService departementService;
 
 	public ListerCollaborateursController() {
 		super();
@@ -38,7 +43,7 @@ public class ListerCollaborateursController extends HttpServlet {
 			throws ServletException, IOException {
 	
 		List<Collaborateur> collaborateurs = collabService.listerCollaborateurs();
-		List<Departement> departements = dptService.listerDepartements();
+		List<Departement> departements = departementService.listerDepartements();
 			
 		request.setAttribute("collaborateurs", collaborateurs);
 		

@@ -3,6 +3,7 @@ package dev.sgp.web;
 import java.io.IOException;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +16,7 @@ import dev.sgp.entite.VisiteLog;
 import dev.sgp.entite.VisiteWeb;
 import dev.sgp.service.CollaborateurService;
 import dev.sgp.service.VisiteWebService;
-import dev.sgp.util.Constantes;
+
 
 /**
  * Servlet implementation class VisiteWebController
@@ -24,7 +25,7 @@ import dev.sgp.util.Constantes;
 public class VisiteWebController extends HttpServlet {
 	public static final String visiteurJs = "/WEB-INF/views/collab/statististiqueVisiteWeb.jsp";
 	private static final long serialVersionUID = 1L;
-	private VisiteWebService visiteWebService = Constantes.VISITE_WEB_SERVICE;
+	@Inject private VisiteWebService visiteWebService;
 
 	/**
 	 * @see HttpServlet#HttpServlet()

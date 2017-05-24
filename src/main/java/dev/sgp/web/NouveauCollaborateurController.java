@@ -10,6 +10,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dev.sgp.entite.Collaborateur;
 import dev.sgp.service.CollaborateurService;
-import dev.sgp.util.Constantes;
+
 
 /**
  * Servlet implementation class NouveauCollaborateur
@@ -27,7 +28,7 @@ import dev.sgp.util.Constantes;
 public class NouveauCollaborateurController extends HttpServlet {
 	public static final String nouveauJs = "/WEB-INF/views/collab/nouveauCollaborateur.jsp";
 	private static final long serialVersionUID = 1L;
-	private CollaborateurService collabService = Constantes.COLLAB_SERVICE;
+	@Inject private CollaborateurService collabService ;
 
 	public NouveauCollaborateurController() {
 		super();
