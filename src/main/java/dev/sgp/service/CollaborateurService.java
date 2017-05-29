@@ -77,4 +77,18 @@ public class CollaborateurService {
 		return query.getResultList();
 	}
 
+	public Collaborateur collabByMatricule(String matricule) {
+
+		// TypedQuery<Collaborateur> query = em.createQuery("Select c from
+		// Collaborateur c where c.matricule=:matri",
+		// Collaborateur.class);
+		// query.setParameter("matri", matricule);
+		//
+		// return query.getSingleResult();
+
+		
+		//************* Les lignes du dessus est la ligne du dessous font exactement la même chose
+		return em.find(Collaborateur.class, matricule);
+	}
+
 }

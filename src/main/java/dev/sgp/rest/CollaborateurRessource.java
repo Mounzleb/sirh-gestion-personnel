@@ -1,6 +1,5 @@
 package dev.sgp.rest;
 
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,49 +16,44 @@ import dev.sgp.entite.Departement;
 import dev.sgp.service.CollaborateurService;
 import dev.sgp.service.DepartementService;
 
-
-
 @Path("/collaborateurs")
 public class CollaborateurRessource {
-	
+
 	@Inject
 	private CollaborateurService collabService;
-	
-	
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Collaborateur> list() {
 		List<Collaborateur> collaborateurs = collabService.listerCollaborateurs();
-	
+
 		return collaborateurs;
 	}
-	
+
 	@GET
-    @Produces(MediaType.APPLICATION_JSON)
-    
-    public List<Collaborateur> list(@QueryParam("departement") @DefaultValue("0") Integer departementId ) {
-        
-        List<Collaborateur> collaborateurs;
-        
-        if(departementId != 0) {
-            collaborateurs = collabService.collabByDepartementId(departementId);
-        } else {
-            collaborateurs = collabService.listerCollaborateurs();
-        }
-        return collaborateurs;
-    }
-	
-	@GET
-	@Path("/{matricules}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Departement findByID(@PathParam("id") Integer id){
-		
-  
-		
-		
-		return null;
+
+	public List<Collaborateur> listCollabByDepartementId(
+			@QueryParam("departement") @DefaultValue("0") Integer departementId) {
+
+		List<Collaborateur> collaborateurs;
+
+		if (departementId != 0) {
+			collaborateurs = collabService.collabByDepartementId(departementId);
+		} else {
+			collaborateurs = collabService.listerCollaborateurs();
+		}
+		return collaborateurs;
+	}
+
+	@GET
+	@Path("/{matricule}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collaborateur listCollabByMatricule(@PathParam("matricule") String matricule) {
+
+		Collaborateur collaborateur = collabService.collabByMatricule(matricule);
+
+		return collaborateur;
 	}
 
 }
-
