@@ -85,6 +85,19 @@ public class CollaborateurService {
 
 		return collaborateur;
 	}
-	
+
+	public Collaborateur changeInfosBanquaireCollab(String matricule, Collaborateur collab) {
+
+		Collaborateur collaborateur = collabByMatricule(matricule);
+
+		if (collaborateur != null) {
+
+			collaborateur.setBanque(collab.getBanque());
+			collaborateur.setBic(collab.getBic());
+			collaborateur.setIban(collab.getIban());
+		}
+
+		return collaborateur;
+	}
 
 }
