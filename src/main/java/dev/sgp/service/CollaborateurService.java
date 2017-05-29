@@ -81,15 +81,10 @@ public class CollaborateurService {
 			collaborateur.setEmailPro(collab.getEmailPro());
 			collaborateur.setDateDeNaissance(collab.getDateDeNaissance());
 			collaborateur.setAdresse(collab.getAdresse());
-
-//			CollabEvt collaboModifier = new CollabEvt();
-//
-//			collaboModifier.setMatricule(collab.getMatricule());
-//			collaboModifier.setDateHeure(collab.getDateHeureCreation());
-//			collaboModifier.setType(TypeCollabEvt.MODIFICATION_COLLAB);
 		}
 
 		return collaborateur;
 	}
+	
 
 }

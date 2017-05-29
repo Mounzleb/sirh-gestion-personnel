@@ -60,15 +60,15 @@ public class EcouteurData implements ServletContextListener {
 
 		Stream.of(
 				new Collaborateur("1", "Jack", "Jacko", LocalDate.parse("1993-06-25"), "14", "121212121212123",
-						"ee.ss@societe.com", "img.png",dpt1 , dateHeureCreation, true),
+						"ee.ss@societe.com", "img.png",dpt1 , dateHeureCreation,"banque1","bic1","iban1", true),
 				new Collaborateur("2", "Laura", "Laure", LocalDate.parse("1993-06-25"), "14", "121212121212124",
-						"ee.ss@societe.com", "img.png",dpt2 , dateHeureCreation, true),
+						"ee.ss@societe.com", "img.png",dpt2 , dateHeureCreation,"banque2","bic2","iban2", true),
 				new Collaborateur("3", "Meryem", "Amina", LocalDate.parse("1993-06-25"), "14", "121212121212151",
-						"ee.ss@societe.com", "img.png",dpt3 , dateHeureCreation, true),
+						"ee.ss@societe.com", "img.png",dpt3 , dateHeureCreation,"banque3","bic3","iban3", true),
 				new Collaborateur("4", "Mohammad", "Abt", LocalDate.parse("1993-06-25"), "14", "121212121212161",
-						"ee.ss@societe.com", "img.png", dpt4, dateHeureCreation, true),
+						"ee.ss@societe.com", "img.png", dpt4, dateHeureCreation,"banque4","bic4","iban4", true),
 				new Collaborateur("5", "Man", "Jhay", LocalDate.parse("1993-06-25"), "14", "121212121212161",
-						"ee.ss@societe.com", "img.png",dpt1 , dateHeureCreation, true)
+						"ee.ss@societe.com", "img.png",dpt1 , dateHeureCreation,"banque5","bic5","iban5", true)
 
 		).forEach(collab -> collabService.sauvegarderCollaborateur(collab));
 		// ).forEach(collab -> em.persist(collab));

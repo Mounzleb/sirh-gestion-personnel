@@ -20,9 +20,12 @@ public class Collaborateur {
 	private String emailPro;
 	private String photo;
 	private ZonedDateTime dateHeureCreation;
-	boolean actif;
 	@ManyToOne
 	private Departement departement;
+	private String banque;
+	private String bic;
+	private String iban;
+	boolean actif;
 
 	public Collaborateur() {
 
@@ -30,7 +33,7 @@ public class Collaborateur {
 
 	public Collaborateur(String matricule, String nom, String prenom, LocalDate dateDeNaissance, String adresse,
 			String numeroDeSecuSociale, String emailPro, String photo, Departement departement,
-			ZonedDateTime dateHeureCreation, boolean actif) {
+			ZonedDateTime dateHeureCreation, String banque, String bic, String iban, boolean actif) {
 		super();
 		this.matricule = matricule;
 		this.nom = nom;
@@ -40,8 +43,11 @@ public class Collaborateur {
 		this.numeroDeSecuSociale = numeroDeSecuSociale;
 		this.emailPro = emailPro;
 		this.photo = photo;
-		this.departement = departement;
 		this.dateHeureCreation = dateHeureCreation;
+		this.departement = departement;
+		this.banque = banque;
+		this.bic = bic;
+		this.iban = iban;
 		this.actif = actif;
 	}
 
@@ -125,13 +131,36 @@ public class Collaborateur {
 		this.actif = actif;
 	}
 
-
 	public Departement getDepartement() {
 		return departement;
 	}
 
 	public void setDepartement(Departement departement) {
 		this.departement = departement;
+	}
+
+	public String getBanque() {
+		return banque;
+	}
+
+	public void setBanque(String banque) {
+		this.banque = banque;
+	}
+
+	public String getBic() {
+		return bic;
+	}
+
+	public void setBic(String bic) {
+		this.bic = bic;
+	}
+
+	public String getIban() {
+		return iban;
+	}
+
+	public void setIban(String iban) {
+		this.iban = iban;
 	}
 
 }

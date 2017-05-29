@@ -1,6 +1,8 @@
 package dev.sgp.rest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.ws.rs.DefaultValue;
@@ -71,6 +73,24 @@ public class CollaborateurRessource {
 		
 		Collaborateur collaborateur = collabService.changeCollabByMatricule(matricule, collab);
 		return collaborateur;
+	}
+	
+	@GET
+	@Path("/{matricule}/banque")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Map<String, String> coordonneeBanquair(@PathParam("matricule") String matricule) {
+
+		Collaborateur collaborateur = collabService.collabByMatricule(matricule);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		result.put("banque", collaborateur.getBanque());
+		result.put("bic", collaborateur.getBic());
+		result.put("iban", collaborateur.getIban());
+		
+		
+		
+		return result;
 	}
 	
 	
