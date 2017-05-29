@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -30,6 +31,8 @@ public class CollaborateurRessource {
 		return collaborateurs;
 	}
 
+	// *******Trouver les collaborateurs ayant le même id de departement avec Le
+	// QueryParam (?parametre=valeur)
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 
@@ -38,22 +41,38 @@ public class CollaborateurRessource {
 
 		List<Collaborateur> collaborateurs;
 
+		// *****Si le departementId est différent de 0 appliqué le filtre
 		if (departementId != 0) {
 			collaborateurs = collabService.collabByDepartementId(departementId);
-		} else {
+		}
+		// ****sinon afficher la liste des collaborateurs compléte
+		else {
 			collaborateurs = collabService.listerCollaborateurs();
 		}
 		return collaborateurs;
 	}
 
+	// ****** Trouver un collaborateur par son matricule dans le paths
 	@GET
 	@Path("/{matricule}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collaborateur listCollabByMatricule(@PathParam("matricule") String matricule) {
+	public Collaborateur leCollabByMatricule(@PathParam("matricule") String matricule) {
 
 		Collaborateur collaborateur = collabService.collabByMatricule(matricule);
 
 		return collaborateur;
 	}
+	
+	
+	@PUT
+	@Path("/{matricule}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collaborateur modifierCollaborateur (@PathParam("matricule") String matricule, Collaborateur collab){
+		
+		Collaborateur collaborateur = collabService.changeCollabByMatricule(matricule, collab);
+		return collaborateur;
+	}
+	
+	
 
 }

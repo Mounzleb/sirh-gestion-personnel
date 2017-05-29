@@ -21,7 +21,7 @@ public class CollaborateurService {
 	@Inject
 	Event<CollabEvt> emetteurEvenementCollab;
 
-	// le unit name est le nom de la <persistence-unit name="sgp-pu"> dans le
+	// le unitName: nom de la <persistence-unit name="sgp-pu"> dans le
 	// persistance.xml
 	@PersistenceContext(unitName = "sgp-pu")
 	private EntityManager em;
@@ -31,10 +31,6 @@ public class CollaborateurService {
 		TypedQuery<Collaborateur> query = em.createQuery("Select collabo from Collaborateur collabo",
 				Collaborateur.class);
 
-		// ici le query.getResultList() recupére nos collaborateur créer et les
-		// met dans une liste
-		// on remplace ainsi l'utilisation des listes avec List<> (Voir version
-		// précédente)
 		return query.getResultList();
 	}
 
@@ -45,50 +41,55 @@ public class CollaborateurService {
 
 		// ****************Création évenement*******************
 
-		// On crée un objet qui est l'evenement qu'on va envoyé dans le bus
-		// d'evenement
+		// objet evenement qui va être envoyé dans le bus d'evenements
 		CollabEvt evenementCreer = new CollabEvt();
 
-		// on stoque recupére le matricule créer lors de la création d'un
-		// collaborateur (de la classe Collaborateur)
-		// puis on l'assinue à setMatricule pour changer la valeur du matricule
-		// dans CollabEvt
-		// et enfin on stock tous ça dans notre évenement evenementCréer
 		evenementCreer.setMatricule(collab.getMatricule());
 		evenementCreer.setDateHeure(collab.getDateHeureCreation());
 		evenementCreer.setType(TypeCollabEvt.CREATION_COLLAB);
 
-		// pour envoyer l'evenement dans le bus
-
+		// Envoie de l'evenement dans le bus
 		emetteurEvenementCollab.fire(evenementCreer);
 	}
 
+	// Chercher les colaborateurs par l'id de leurs departements la base de
+	// donné
 	public List<Collaborateur> collabByDepartementId(Integer departementId) {
 
-		// pour un Collobarateur c je recupére l'identifiant du departement(Où
-		// departement est le champs dans ma classe Collaborateur qui a un id)
-		// et je la stoque dans la variable id par :id
 		TypedQuery<Collaborateur> query = em.createQuery("Select c from Collaborateur c where c.departement.id=:id",
 				Collaborateur.class);
-		// la variable que j'ai créé je lui assinue ma variable id que j'ai en
-		// parametre de ma fonction getDepartement
+
 		query.setParameter("id", departementId);
 
 		return query.getResultList();
 	}
 
+	// Chercher le colaborateur par son matricule dans la base de donnée
 	public Collaborateur collabByMatricule(String matricule) {
 
-		// TypedQuery<Collaborateur> query = em.createQuery("Select c from
-		// Collaborateur c where c.matricule=:matri",
-		// Collaborateur.class);
-		// query.setParameter("matri", matricule);
-		//
-		// return query.getSingleResult();
-
-		
-		//************* Les lignes du dessus est la ligne du dessous font exactement la même chose
 		return em.find(Collaborateur.class, matricule);
+	}
+
+	public Collaborateur changeCollabByMatricule(String matricule, Collaborateur collab) {
+		// **** le collab sera le nouveau collaborateur aprés la modification
+
+		// le colaborateur ici est celui qui est dans la base de donnée
+		Collaborateur collaborateur = collabByMatricule(matricule);
+
+		if (collaborateur != null) {
+
+			collaborateur.setEmailPro(collab.getEmailPro());
+			collaborateur.setDateDeNaissance(collab.getDateDeNaissance());
+			collaborateur.setAdresse(collab.getAdresse());
+
+//			CollabEvt collaboModifier = new CollabEvt();
+//
+//			collaboModifier.setMatricule(collab.getMatricule());
+//			collaboModifier.setDateHeure(collab.getDateHeureCreation());
+//			collaboModifier.setType(TypeCollabEvt.MODIFICATION_COLLAB);
+		}
+
+		return collaborateur;
 	}
 
 }
