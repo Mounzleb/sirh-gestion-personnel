@@ -1,7 +1,6 @@
 
 package dev.sgp.service;
 
-
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -19,24 +18,23 @@ import dev.sgp.entite.TypeCollabEvt;
 @Stateless
 public class CollaborateurService {
 
-	
-
 	@Inject
 	Event<CollabEvt> emetteurEvenementCollab;
 
 	// le unit name est le nom de la <persistence-unit name="sgp-pu"> dans le
 	// persistance.xml
-	@PersistenceContext(unitName = "sgp-pu") private EntityManager em;
+	@PersistenceContext(unitName = "sgp-pu")
+	private EntityManager em;
 
 	public List<Collaborateur> listerCollaborateurs() {
-		
-	
 
 		TypedQuery<Collaborateur> query = em.createQuery("Select collabo from Collaborateur collabo",
 				Collaborateur.class);
-		
-		// ici le query.getResultList() recupére nos collaborateur créer et les met dans une liste
-		// on remplace ainsi l'utilisation des listes avec List<> (Voir version précédente)
+
+		// ici le query.getResultList() recupére nos collaborateur créer et les
+		// met dans une liste
+		// on remplace ainsi l'utilisation des listes avec List<> (Voir version
+		// précédente)
 		return query.getResultList();
 	}
 
@@ -63,6 +61,20 @@ public class CollaborateurService {
 		// pour envoyer l'evenement dans le bus
 
 		emetteurEvenementCollab.fire(evenementCreer);
+	}
+
+	public List<Collaborateur> collabByDepartementId(Integer departementId) {
+
+		// pour un Collobarateur c je recupére l'identifiant du departement(Où
+		// departement est le champs dans ma classe Collaborateur qui a un id)
+		// et je la stoque dans la variable id par :id
+		TypedQuery<Collaborateur> query = em.createQuery("Select c from Collaborateur c where c.departement.id=:id",
+				Collaborateur.class);
+		// la variable que j'ai créé je lui assinue ma variable id que j'ai en
+		// parametre de ma fonction getDepartement
+		query.setParameter("id", departementId);
+
+		return query.getResultList();
 	}
 
 }

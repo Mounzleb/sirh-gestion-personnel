@@ -22,32 +22,58 @@ public class EcouteurData implements ServletContextListener {
 
 	@Inject
 	private CollaborateurService collabService;
+	
 	@Inject
 	private DepartementService departementService;
+	
+	
+	
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
+		
+		Departement dpt1 = new Departement();
+		Departement dpt2 = new Departement();
+		Departement dpt3 = new Departement();
+		Departement dpt4 = new Departement();
+		Departement dpt5 = new Departement();
+	
+		dpt1.setId(1);
+		dpt1.setNom("Comptabilité");
+		
+		dpt2.setId(2);
+		dpt2.setNom("Ressources Humaines");
+		
+		dpt3.setId(3);
+		dpt3.setNom("Informatique");
+		
+		dpt4.setId(4);
+		dpt4.setNom("Administratif");
+		
+		dpt5.setId(5);
+		dpt5.setNom("cccc");
+		
+		Stream.of(dpt1,dpt2,dpt3,dpt4,dpt5)
+				.forEach(departement -> departementService.sauvegarderDepartement(departement));
 
 		ZonedDateTime dateHeureCreation = ZonedDateTime.now();
 
 		Stream.of(
-				new Collaborateur("1", "ee", "ss", LocalDate.parse("1993-06-25"), "14", "121212121212123",
-						"ee.ss@societe.com", "img.png", dateHeureCreation, true),
-				new Collaborateur("2", "est", "rr", LocalDate.parse("1993-06-25"), "14", "121212121212124",
-						"ee.ss@societe.com", "img.png", dateHeureCreation, true),
-				new Collaborateur("3", "pmp", "cdr", LocalDate.parse("1993-06-25"), "14", "121212121212151",
-						"ee.ss@societe.com", "img.png", dateHeureCreation, true),
-				new Collaborateur("4", "sar", "vif", LocalDate.parse("1993-06-25"), "14", "121212121212161",
-						"ee.ss@societe.com", "img.png", dateHeureCreation, true),
-				new Collaborateur("5", "pop", "youpi", LocalDate.parse("1993-06-25"), "14", "121212121212161",
-						"ee.ss@societe.com", "img.png", dateHeureCreation, true)
+				new Collaborateur("1", "Jack", "Jacko", LocalDate.parse("1993-06-25"), "14", "121212121212123",
+						"ee.ss@societe.com", "img.png",dpt1 , dateHeureCreation, true),
+				new Collaborateur("2", "Laura", "Laure", LocalDate.parse("1993-06-25"), "14", "121212121212124",
+						"ee.ss@societe.com", "img.png",dpt2 , dateHeureCreation, true),
+				new Collaborateur("3", "Meryem", "Amina", LocalDate.parse("1993-06-25"), "14", "121212121212151",
+						"ee.ss@societe.com", "img.png",dpt3 , dateHeureCreation, true),
+				new Collaborateur("4", "Mohammad", "Abt", LocalDate.parse("1993-06-25"), "14", "121212121212161",
+						"ee.ss@societe.com", "img.png", dpt4, dateHeureCreation, true),
+				new Collaborateur("5", "Man", "Jhay", LocalDate.parse("1993-06-25"), "14", "121212121212161",
+						"ee.ss@societe.com", "img.png",dpt1 , dateHeureCreation, true)
 
 		).forEach(collab -> collabService.sauvegarderCollaborateur(collab));
 		// ).forEach(collab -> em.persist(collab));
 
-		Stream.of(new Departement(1, "departement1"), new Departement(2, "departement2"),
-				new Departement(3, "departement3"))
-				.forEach(departement -> departementService.sauvegarderDepartement(departement));
+		
 
 	}
 
