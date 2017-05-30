@@ -53,6 +53,10 @@ Clique droit projet -> configure -> convert to JPA project
 cocher : discover annotated classes automatically
 
 
+************************************Classe JacksonContextResolver************************************
+Nous permet d'afficher le dormat des date json en raccourci. Sans cette classe on se retrouve avec des dates immense lors de l'affichage
+
+
 
 
 

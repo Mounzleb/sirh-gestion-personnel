@@ -36,14 +36,14 @@ public class DepartementService {
 	}
 
 	public Departement getDepartement(Integer id) {
-		
+
 		// avec depart.id=:id je crée une variable id
 		TypedQuery<Departement> query = em.createQuery("Select depart from Departement depart where depart.id=:id",
 				Departement.class);
 		// la variable que j'ai créé je lui assinue ma variable id que j'ai en
 		// parametre de ma fonction getDepartement
 		query.setParameter("id", id);
-		
+
 		return query.getResultList().get(0);
 	}
 
